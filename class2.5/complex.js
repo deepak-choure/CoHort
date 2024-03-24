@@ -1,6 +1,15 @@
 //
 const express = require('express');
 const app = express();
+const port = 3000;
+
+
+//middlewere
+app.use(express.json());
+
+
+
+//array of object having only one object;
 var users = [{
     name:"John",
     kidneys:[{
@@ -11,6 +20,8 @@ var users = [{
     }]
 }];
 
+
+//routes
 app.get("/",function(req,res){
     const JohnKidneys = users[0].kidneys;
     const noOfKidneys = JohnKidneys.length;
@@ -29,8 +40,7 @@ app.get("/",function(req,res){
     console.log(JohnKidneys);
     
 })
-//middlewere
-app.use(express.json());
+
 
 
 app.post("/",function(req,res){
@@ -56,14 +66,19 @@ app.put("/",function(req,res){
 //only if atleast one unhealthy kidney is there do this ,else return 411
 app.delete("/",function(req,res){
     if(atleastOneUnhealthyKidney()){
-        const newKidneys = [];
-    for(let i =0;i<users[0].kidneys.length;i++){
-        if(users[0].kidneys[i].healthy){
-            newKidneys.push({
-                healthy: true
-            })
+        // const newKidneys = [];
+    // for(let i =0;i<users[0].kidneys.length;i++){
+    //     if(users[0].kidneys[i].healthy){
+    //         newKidneys.push({
+    //             healthy: true
+    //         })
+    //     }
+    // }
+   const newKidneys = users[0].kidneys.filter((kidney)=>{
+        if(kidney.healthy){
+            return kidney
         }
-    }
+    })
     users[0].kidneys = newKidneys;
     res.json({
         msg: "done",
@@ -85,6 +100,6 @@ function atleastOneUnhealthyKidney(){
     }
     return atleastOneUnhealthyKidney
 }
-app.listen(3000,()=>{
-    console.log("server starts ");
+app.listen(port,()=>{
+    console.log(`Running server consisting example of kidney on port ${port}`);
 })
