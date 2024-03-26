@@ -1,4 +1,4 @@
-//mongoose + express
+//mongoose + express(get request only)
 const mongoose = require("mongoose");
 const express = require("express");
 const port = 3000;
