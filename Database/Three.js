@@ -1,10 +1,12 @@
+//Jwt only 
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const jwtPassword = "123456";
 
 const app = express();
 app.use(express.json());
-
+//let db is not introduce yet
 const ALL_USERS = [
   {
     username: "harkirat@gmail.com",
@@ -42,7 +44,7 @@ app.post("/signin", function (req, res) {
 
   if (!userExists(username, password)) {
     return res.status(403).json({
-      msg: "User doesnt exist in our in memory db",
+      msg: "User doesn't exist in our in memory db",
     });
   }
 

@@ -1,3 +1,6 @@
+//mongoose + express(get and post request);
+//client send data to put in database
+
 const mongoose = require("mongoose");
 const express = require("express");
 const app = express();

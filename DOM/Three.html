@@ -1,0 +1,35 @@
+<!-- Finding and manipultating the element already present in body -->
+<!-- go to w3schools and see more options -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Div one</div>
+    <p>Para one</p>
+    <div>div two</div>
+    <p>para two</p>
+    <div>div three</div>
+    <div id="myDIV" style="border:1px solid black;padding:8px">
+    <h2 class="example">A heading</h2>
+    <p class="example">A paragraph.</p>
+    <p class="example">A paragraph.</p>
+</div>
+<p id="demo"></p>
+</body>
+<script>
+    let paragraph = document.querySelectorAll("p");
+    //query selector work like css selectors, the picking is same as css
+    console.log(paragraph)//nodelist
+    paragraph.forEach(paragraph => paragraph.style.backgroundColor = "pink");
+
+    //nice ex
+    const element = document.getElementById("myDIV");
+    const list = element.querySelectorAll(".example");
+    document.getElementById("demo").innerHTML = list.length;
+
+</script>
+</html>

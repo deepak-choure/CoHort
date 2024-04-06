@@ -1,0 +1,30 @@
+<!-- changing the element -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .democlass {
+        color: red;
+    }
+</style>
+
+<body>
+    <h1 id="myH1">The element object</h1>
+    <h2>The setAttribute() Method</h2>
+
+    <p>Click "Add class" to add a class attribute to the h1 element:</p>
+
+    <button onclick="myFunction()">Add class</button>
+</body>
+<script>
+    function myFunction(){
+        document.getElementById("myH1").setAttribute("class","democlass")
+    }
+</script>
+
+</html>
