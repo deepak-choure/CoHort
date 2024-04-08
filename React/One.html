@@ -1,0 +1,66 @@
+<!-- Foundation: let's build todo -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input id="title"type="text" placeholder="title"><br><br>
+        <input id="description" type="text" placeholder="description"><br><br>
+        <button onclick="todoadd()">Add Todo</button>
+        <div id="container"></div>
+       
+    </div>
+</body>
+<script>
+    //beginner way 
+    function addTodo(){
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const originalcontainer = document.getElementById("container").innerHTML;
+         document.getElementById("container").innerHTML = originalcontainer+ `
+        <div>${title}</div>
+        <div>${description}</div>
+        <button>Mark as done</button>
+        `
+    }
+    //pro level way 
+    function todoadd(){
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+        const newcontainer = document.createElement("div");
+
+        const titlebar = document.createElement("div");
+        const desbar = document.createElement("div");
+        const markbutton = document.createElement("button");
+
+        // titlebar.innerHTML = title;
+        // desbar.innerHTML = description;
+        // markbutton.innerHTML = `Mark as done`;
+        // newcontainer.appendChild(titlebar);
+        // newcontainer.appendChild(desbar);
+        // newcontainer.appendChild(markbutton);
+
+       const titlenode = document.createTextNode(title)
+       const desnode = document.createTextNode(description)
+       const markasread =  document.createTextNode(`Mark as read`)
+
+       titlebar.appendChild(titlenode)
+       desbar.appendChild(desnode)
+       markbutton.appendChild(markasread)
+       
+
+       newcontainer.appendChild(titlebar);
+       newcontainer.appendChild(desbar);
+       newcontainer.appendChild(markbutton);
+
+    
+       document.getElementById("container").appendChild(newcontainer);
+
+
+    }
+</script>
+</html>

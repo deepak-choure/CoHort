@@ -1,0 +1,63 @@
+<!-- State thing  -->
+<!-- if react doesn't exist then we do things like it  -->
+<!-- it is not an most optimal approach -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input id="title" type="text" placeholder="title"><br><br>
+    <input id="description" type="text" placeholder="description"><br><br>
+    <div id="container"></div>
+</body>
+<script>
+    function createChild(title, description, id) {
+
+        const newcontainer = document.createElement("div");
+
+        const titlebar = document.createElement("div");
+        const desbar = document.createElement("div");
+        const markbutton = document.createElement("button");
+
+
+
+        const titlenode = document.createTextNode(title)
+        const desnode = document.createTextNode(description)
+        const markasread = document.createTextNode(`Mark as read`)
+
+        titlebar.appendChild(titlenode)
+        desbar.appendChild(desnode)
+        markbutton.appendChild(markasread)
+
+
+        newcontainer.appendChild(titlebar);
+        newcontainer.appendChild(desbar);
+        newcontainer.appendChild(markbutton);
+        newcontainer.setAttribute("id", id);
+
+
+        return newcontainer;
+
+    }
+    function updateDOMAccToState(state){
+        const parent = document.getElementById("container");
+        parent.innerHTML = "";
+        for(let i =0;i<state.length;i++){
+            const child = createChild(state[i].title,state[i].description,state[i].id)
+            parent.appendChild(child);
+        }
+    }
+    
+    window.setInterval(async function(){
+       const res = await fetch("https://sum-server.100xdevs.com/todos")
+       const json = await res.json();
+       updateDOMAccToState(json.todos)
+    },5000)
+</script>
+
+</html>
