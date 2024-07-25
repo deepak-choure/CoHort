@@ -11,7 +11,7 @@ export default function App8(){
             //hook way
             divRef.current.innerHTML = "5000"
         },5000)
-    })
+    },[]) 
 
     return (
         <div>
