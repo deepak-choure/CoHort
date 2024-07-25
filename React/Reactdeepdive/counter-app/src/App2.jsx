@@ -8,13 +8,9 @@ import { useState } from "react";
  */
 function App2(){
     const [todos,setTodos] = useState([{
-        title:"Go to gym",
-        descrption:"Go to gym form 7 to 9",
-        completed:false
-    },{
-        title:"Study DSA",
-        descrption:"from 9 to 11",
-        completed:true
+        title:"here title come",
+        descrption:"describe the task ",
+        completed:"status of completion"
     }]);
 
     

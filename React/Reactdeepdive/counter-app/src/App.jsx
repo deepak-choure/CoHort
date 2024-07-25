@@ -26,6 +26,7 @@ function App() {
     //   <button onClick={onClickHandler}>Counter {count}</button>
     // </div> 
     <CustomButton count = {count} setCount= {setCount}></CustomButton>
+    
   )
   
 
