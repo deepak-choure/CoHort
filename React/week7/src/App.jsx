@@ -4,7 +4,7 @@ import React from 'react';
 import {BrowserRouter,Routes,Route, useNavigate} from "react-router-dom"
 // import { Dashboard } from './components/Dashboard'
 const Dashboard  = React.lazy(()=> import("./components/Dashboard"));
-import './App.css'
+
 const  Landing  = React.lazy(()=> import("./components/Landing"));
 
 function App() {
