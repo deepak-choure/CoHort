@@ -1,11 +1,13 @@
 const express = require("express");
 const z = require("zod");
+const cors = require("cors")
 const jwt = require("jsonwebtoken");
 const { User, Account } = require("../db.js");
 const {JWT_SECRET} = require("../config.js");
 const { authMiddleware } = require("../Middlewares/middleware.js");
 
 const router = express.Router();
+router.use(cors())
 router.use(express.json())
 const signupBody = z.object({
     username: z.string().email(),
@@ -69,7 +71,7 @@ router.post("/signup", async (req, res) => {
 })
 
 router.post("/signin", async (req, res) => {
-   
+   console.log(req.body)
     const response = signinBody.safeParse(req.body);
     if(!response.success){
       return  res.status(411).json({

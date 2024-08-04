@@ -10,6 +10,7 @@ import App6 from "./App6.jsx"
 import App7 from "./App7.jsx"
 import App8 from "./App8.jsx"
 import App9 from './App9.jsx'
+import App10 from './App10.jsx'
 import  {Assignment1}  from './Assignment1.jsx'
 import  {Assignment2}  from './Assignment2.jsx'
 import { Assignment3 } from './Assignment3.jsx'
@@ -21,7 +22,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <Assignment7 />
+    <App10 />
 
   </>,
 

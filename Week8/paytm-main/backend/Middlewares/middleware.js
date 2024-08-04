@@ -9,15 +9,21 @@ const {JWT_SECRET}= require("../config.js");
         })
     }
     const token = authHeader.split(" ")[1];
-    
-    const decoded = jwt.verify(token, JWT_SECRET);
-    if (!decoded) {
-        return res.status(403).json({
-            msg: "Authorization failed"
-        })
+    try{
+        const decoded = jwt.verify(token, JWT_SECRET);
+        if (!decoded) {
+            return res.status(403).json({
+                msg: "Authorization failed"
+            })
+        }
+        req.userId = decoded.userId
+        next();
+    } catch(error){
+       res.status(403).json({
+        message:"Invalid token provided"
+       })
     }
-    req.userId = decoded.userId
-    next();
+   
 }
 
 module.exports= {
