@@ -17,7 +17,7 @@ async function createUsersTable() {
     `)
     console.log(result);
 }
-
+//createUsersTable()
 
 async function insertData(username: string, email: string, password: string) {
 
@@ -73,7 +73,7 @@ async function createAddressTable() {
     //the last line do relate the table to the another table
     console.log(result)
 }
-// createAddressTable()
+//createAddressTable()
 
 async function insertAddress(user_id: number, street: string, city: string, country: string, pincode: number) {
     const insertaddressQuery = `INSERT INTO addresses (user_id,street,city,country,pincode) VALUES ($1, $2, $3, $4, $5);`
@@ -82,26 +82,64 @@ async function insertAddress(user_id: number, street: string, city: string, coun
 }
 // insertAddress(1,"123 Broadway St","New York","USA",10001);
 
-//study transaction on project.100xdevs.com or somewhere
+//study transaction 
+async function insertDataModified(username: string, email: string, password: string, street: string, city: string, country: string, pincode: number) {
+    try {
+        await client.query("BEGIN");
+        //insert user
+        const insertUserQuery = `INSERT INTO users (username,email, password)
+    VALUES ($1,$2,$3)jjj
+    RETURNING id;`
+        const user = await client.query(insertUserQuery, [username, email, password]);
+        const userId = user.rows[user.rows.length - 1].id;//get id 
+        //insert address using the userId
+        const insertAddressQuery = `INSERT INTO addresses (user_id, city, country, street ,pincode )
+VALUES ($1, $2, $3, $4, $5);`
+        await client.query(insertAddressQuery, [userId, city, country, street, pincode]);
+        //COMMIT THE TRANSACTION
+        await client.query("COMMIT")
+        console.log("user and address inserted succesfully");
+    } catch (error) {
+        await client.query("ROLLBACK");
+        console.error("Error during transaction ", error)
+    }
+
+
+
+
+
+
+}
+
+// insertDataModified(
+//     'johndoe', 
+//     'john.doe@example.com', 
+//     'securepassword123', 
+//     'New York', 
+//     'USA', 
+//     '123 Broadway St', 
+//     10001
+// );
 
 //joins
 //relationship is easy 
 //joining data from 2 or more table is hard
-//join reduces the query operations which make app faster
+//above we done to query in one function
+//join reduces the query operations which make app faster 
 //
 async function getUserDetailsWithAddress(userId: string) {
     const query = `SELECT u.id,u.username,u.email,a.city,a.country,a.pincode
                     FROM users u
                     JOIN addresses a ON u.id = a.user_id
                     WHERE u.id = $1`
-    const result = await client.query(query,[userId]);
-    if(result.rows.length>0){
-        console.log('User and address found:',result.rows[0]);
+    const result = await client.query(query, [userId]);
+    if (result.rows.length > 0) {
+        console.log('User and address found:', result.rows[0]);
 
-    }else{
+    } else {
         console.log("NO user or address found with the given ID.");
 
     }
 
 }
-getUserDetailsWithAddress("1")
+//getUserDetailsWithAddress("1")
