@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { env } from "hono/adapter";
 import { verify } from "hono/jwt";
+import { createBlogInput, updateBlogInput } from "@deepak_choure/blogprojectcommon";
 
 const blogRouter = new Hono<{
   Bindings: {
@@ -58,6 +59,13 @@ blogRouter.post("/", async (c) => {
 
     const authorId = c.get("userId");
     const reqBody = await c.req.json();
+    const {success} = createBlogInput.safeParse(reqBody)
+    if(!success){
+      c.status(411);
+      return c.json({
+        msg:"Invalid input provided while creation"
+      })
+    }
     const post = await prisma.post.create({
       data: {
         title: reqBody.title,
@@ -85,6 +93,13 @@ blogRouter.put("/", async (c) => {
       datasourceUrl: env(c).DATABASE_URL
     }).$extends(withAccelerate());
     const body = await c.req.json();
+    const {success} = updateBlogInput.safeParse(body);
+    if(!success){
+      c.status(411);
+      return c.json({
+        msg:"Invalid input provided while updation"
+      })
+    }
     const postId = body.id;
     const userId = c.get("userId");
     await prisma.post.update({
