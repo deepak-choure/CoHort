@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://blogbackend.dchoure2306.workers.dev"

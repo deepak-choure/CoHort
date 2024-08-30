@@ -16,9 +16,9 @@ compatibility_date = "2024-08-21"
 # Note: Use secrets to store sensitive data.
 # - https://developers.cloudflare.com/workers/configuration/secrets/
  [vars]
- DATABASE_URL = ""
+ DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZTE2YjY1NTEtMjFiOS00ZjE3LTg4Y2ItNTVkMjE2ODRlODEyIiwidGVuYW50X2lkIjoiZTIwYjViNzdmMjEzNWU5ZDZjZWY4OTEzNzE3ZDliODQwMGQ5OTg5NmM3ZTFmNGIwNDNiMDkxMzg0N2NlZGU2MSIsImludGVybmFsX3NlY3JldCI6IjI1YjFiODQzLWMzNjktNGViNi04MmRhLWMwZWI0OGRjODA2YSJ9.jOR-qpj1AQctu0bco5dNjryqK4lBCeMXjtAWVHHwYRo"
  
- JWT_SECRET = ""
+ JWT_SECRET = "notebookappjwtsecret"
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai
