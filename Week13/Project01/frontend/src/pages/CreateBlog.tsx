@@ -50,9 +50,3 @@ export function CreateBlog() {
         </div>
     )
 }
-function TextEditor() {
-
-    return (
-        <div></div>
-    )
-}
