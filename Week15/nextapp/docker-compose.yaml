@@ -1,0 +1,12 @@
+version: '1.0'
+services:
+ app:
+  image: mynextapp
+  container_name: "nextapplication"
+  ports:
+   - "3000:3000"
+  volumes:
+   - ./app:/nextapp/app
+
+
+   
